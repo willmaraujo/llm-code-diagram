@@ -1,0 +1,17 @@
+Analyze the following Python project and generate a dependency graph in Mermaid format.
+
+- Identify modules, classes, and functions.
+- Extract relationships (function calls, imports, class instantiation).
+- Generate output directly in Mermaid syntax.
+
+### Expected Output Format:
+```mermaid
+graph TD
+    A[Module1] -->|calls| B[Function1]
+    B -->|calls| C[Function2]
+    A -->|imports| D[Module2]
+
+
+---
+
+{CODE_HERE}
