@@ -9,7 +9,7 @@ def load_prompt_template(filepath="../prompts/llm-prompt.txt"):
     with open(filepath, "r", encoding="utf-8") as file:
         return file.read()
 
-def call_llm(prompt, model="deepseek-r1:8b"):
+def call_llm(prompt, model="llama3.1:8b"):
     """
     Sends the prompt to an LLM server and returns the response.
     """
@@ -24,7 +24,7 @@ def call_llm(prompt, model="deepseek-r1:8b"):
     return response.json()["response"] if response.status_code == 200 else None
 
 def main():
-    project_dir = "toy_project"
+    project_dir = "../toy-project"
     code_files = read_project_code(project_dir)
 
     # Combine all code files into a single string
@@ -35,6 +35,8 @@ def main():
 
     # Inject the code into the prompt template
     prompt = prompt_template.replace("{CODE_HERE}", full_code)
+
+    print(prompt)
 
     output = call_llm(prompt)
 

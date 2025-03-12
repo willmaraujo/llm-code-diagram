@@ -2,16 +2,20 @@
 
 from inventory import Inventory
 from payment import PaymentProcessor
-from order import Order
 
-class OrderService:
-    def __init__(self):
-        self.inventory = Inventory()
-        self.payment_processor = PaymentProcessor()
+class Order:
+    def __init__(self, item, quantity, price):
+        """Initialize an order with an item, quantity, and price."""
+        self.item = item
+        self.quantity = quantity
+        self.price = price
 
-    def create_order(self, item, quantity, price):
-        order = Order(item, quantity, price)
-        if order.place_order(self.inventory, self.payment_processor):
-            print("Order successful.")
-        else:
-            print("Order failed.")
+    def total_amount(self):
+        """Calculate the total amount of the order."""
+        return self.quantity * self.price
+
+    def place_order(self, inventory: Inventory, payment_processor: PaymentProcessor):
+        """Place an order if inventory and payment conditions are met."""
+        if inventory.update_stock(self.item, self.quantity):
+            return payment_processor.process_payment(self.total_amount())
+        return False

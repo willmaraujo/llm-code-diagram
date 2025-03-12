@@ -1,18 +1,19 @@
 # main.py
 
-from order import OrderService
+from order_service import OrderService
 
 def main():
+    """Main function to simulate order processing."""
     order_service = OrderService()
+
     order_details = [
-        ("Laptop", 2, 1200),
-        ("Headphones", 5, 200),
-        ("Mouse", 10, 50)
+        ("apple", 2, 3),
+        ("banana", 5, 1),
+        ("orange", 10, 2)
     ]
 
     for item, quantity, price in order_details:
-        success = order_service.create_order(item, quantity, price)
-        if success:
-            print(f"Order placed for {quantity} {item}(s)")
-        else:
-            print(f"Order failed for {item}")
+        order_service.create_order(item, quantity, price)
+
+if __name__ == "__main__":
+    main()
