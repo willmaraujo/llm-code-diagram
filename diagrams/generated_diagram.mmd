@@ -1,21 +1,31 @@
-```mermaid
-graph TD
-    A[order_service.py] -->|calls| B[OrderService]
-    B -->|calls| C[Inventory]
-    C -->|imports| D[inventory.py]
-    C -->|calls| E[update_stock]
-    E -->|calls| F[check_stock]
-    F -->|calls| G[stock]
-    A -->|calls| H[create_order]
-    H -->|calls| I[Order]
-    I -->|calls| J[place_order]
-    J -->|calls| K[total_amount]
-    K -->|calls| L[self.price]
-    L -->|calls| M[self.quantity]
-    J -->|calls| N[inventory.update_stock]
-    B -->|imports| O[payment.py]
-    B -->|calls| P[PaymentProcessor]
-    P -->|calls| Q[process_payment]
-    A -->|imports| D
-    A -->|imports| E[payment.py]
+```json
+[
+  {
+    "module": "order_service.py",
+    "imports": ["inventory", "payment", "order"],
+    "dependencies": ["Inventory", "PaymentProcessor", "Order"]
+  },
+  {
+    "module": "order.py",
+    "imports": ["inventory", "payment"],
+    "dependencies": ["Inventory", "PaymentProcessor"]
+  },
+  {
+    "module": "main.py",
+    "imports": ["order_service"],
+    "dependencies": ["OrderService"]
+  },
+  {
+    "module": "payment.py",
+    "imports": [],
+    "dependencies": []
+  },
+  {
+    "module": "inventory.py",
+    "imports": [],
+    "dependencies": []
+  }
+]
 ```
+
+This output represents the module dependencies extracted from the provided Python code. It includes a JSON array containing objects for each module, detailing their imports and dependencies.
