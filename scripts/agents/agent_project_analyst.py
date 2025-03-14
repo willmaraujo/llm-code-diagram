@@ -1,8 +1,7 @@
 import requests
 import os
-from read_code import read_project_code
 
-def load_prompt_template(filepath="../prompts/llm-prompt.txt"):
+def load_prompt_template(filepath="../prompts/agent_project_analyst.txt"):
     """
     Reads the LLM prompt template from a file.
     """
@@ -26,7 +25,23 @@ def call_llm(prompt, model="llama3.1:8b"):
     response = requests.post(url, json=data)
     return response.json()["response"] if response.status_code == 200 else None
 
-def main():
+def read_project_code(directory):
+    """
+    Reads all Python files in the given directory and returns a dictionary 
+    with filenames as keys and file contents as values.
+    """
+    code_files = {}
+    
+    for root, _, files in os.walk(directory):
+        for file in files:
+            if file.endswith(".py"):  # Read only Python files
+                file_path = os.path.join(root, file)
+                with open(file_path, "r", encoding="utf-8") as f:
+                    code_files[file] = f.read()
+    
+    return code_files
+
+def run():
     project_dir = "../toy-project"
     code_files = read_project_code(project_dir)
 
@@ -43,18 +58,4 @@ def main():
 
     output = call_llm(prompt)
 
-    # Define the output directory and file
-    output_dir = "../diagrams"
-    output_file = os.path.join(output_dir, "generated_diagram.mmd")
-
-    # Ensure the directory exists
-    os.makedirs(output_dir, exist_ok=True)
-
-    # Save Mermaid diagram
-    with open(output_file, "w", encoding="utf-8") as f:
-        f.write(output)
-
-    print(f"Diagram saved as {output_file}")
-
-if __name__ == "__main__":
-    main()
+    return output
