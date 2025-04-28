@@ -5,7 +5,7 @@ import json
 # Settings
 OLLAMA_API_URL = "http://localhost:11434/api/chat"
 MODEL_NAME = "llama3:8b"
-PROJECT_PATH = "./toy-project/src/app"  # Adjust this if needed
+PROJECT_PATH = "./toy-project/src/app"
 
 
 def read_all_ts_files(base_path):
@@ -26,13 +26,18 @@ You are a system that analyzes Angular projects.
 
 Your task is to read the following TypeScript files and extract a logical representation of the project dependencies between modules, components, and services.
 
-Please output the dependency graph using **Mermaid syntax**.
+Output ONLY a valid **Mermaid graph** using **graph LR**.
 
+Rules:
+- Connect elements with `-->` showing their dependencies.
+- DO NOT add any lines like `Module --> X` to describe types.
+- Use subgraphs for modules if necessary.
+- Do not add explanations or extra text outside the code block.
+
+Here are the files:
 ---
 {code_content}
 ---
-
-Please generate the Mermaid diagram showing how modules, components, and services are connected.
 """
     return prompt.strip()
 
