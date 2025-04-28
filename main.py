@@ -65,6 +65,25 @@ def send_prompt_to_ollama(prompt):
 
     return full_response
 
+def save_mermaid_diagram(content, output_dir="diagrams", filename="diagram.mmd"):
+    """
+    Save the Mermaid diagram content to a file.
+    
+    Args:
+        content (str): Mermaid diagram content.
+        output_dir (str): Directory to save the diagram.
+        filename (str): Filename for the saved diagram.
+    """
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    output_path = os.path.join(output_dir, filename)
+    
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(content)
+
+    print(f"Mermaid diagram saved to {output_path}")
+
 
 if __name__ == "__main__":
     print("Reading project files...")
@@ -76,5 +95,4 @@ if __name__ == "__main__":
     print("Sending prompt to Llama 3...")
     result = send_prompt_to_ollama(prompt)
 
-    print("\n--- Mermaid Diagram Output ---\n")
-    print(result)
+    save_mermaid_diagram(result)
