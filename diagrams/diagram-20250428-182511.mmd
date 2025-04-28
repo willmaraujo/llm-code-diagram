@@ -1,0 +1,17 @@
+Here is the Mermaid Flowchart syntax for the documentation:
+
+```mermaid
+graph LR
+    A[Main] -->|Import|> B[App]
+    B -->|Declaration|> C[TasksModule]
+    C -->|Declarations|> D[TaskListComponent]
+    C -->|Declarations|> E[TaskItemComponent]
+    C -->|Declarations|> F[TaskDetailsComponent]
+    G[NotificationService] -->|Alert|> H[ConsoleLog]
+    I[TaskService] -->|Get Tasks|> J[TasksArray]
+    I[TaskService] -->|Get Task|> K[SingleTask]
+    M[Test Bed] -->|Test|> N[Test Result]
+
+```
+
+Note: This is just a representation of the documentation in Mermaid Flowchart syntax, it's not meant to be a detailed diagram of all the interactions between components.

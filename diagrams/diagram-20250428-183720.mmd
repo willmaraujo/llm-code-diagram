@@ -1,0 +1,32 @@
+Here is the Mermaid Flowchart syntax based on the provided documentation:
+
+```mermaid
+graph LR
+    A[App] -->|TaskListComponent|> B(TaskList)
+    B -->|TaskItemComponent|> C(TaskItems)
+    C -->|TaskDetailsComponent|> D(TaskDetails)
+    D -->|NotificationService|> E(Notifications)
+
+    F(TaskService) --> G(Tasks)
+    H(NotificationService) --> I(Notifications)
+
+    A --> F
+    A --> H
+
+    classDef task component;
+    class TaskService, NotificationService;
+
+    B[TaskListComponent]
+    C[TaskItemComponent]
+    D[TaskDetailsComponent]
+    E[Notifications]
+    F[TaskService]
+    G[Tasks]
+    H[NotificationService]
+    I[Notifications]
+
+```
+
+This flowchart represents the relationships between different components and services in the application. It shows how the `App` component interacts with the `TaskListComponent`, which in turn talks to the `TaskItemComponent` and `TaskDetailsComponent`. The `TaskDetailsComponent` uses the `NotificationService` to display notifications.
+
+The `TaskService` is responsible for managing tasks, while the `NotificationService` handles displaying notifications.

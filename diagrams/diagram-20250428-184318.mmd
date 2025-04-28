@@ -1,0 +1,15 @@
+```mermaid
+graph LR
+    A[App] -->|import| B[Notification Service]
+    A -->|import| C[Task Service]
+    B -->|alert| D[Console]
+    C -->|getTasks| E[List of Tasks]
+    C -->|getTask| F[Specific Task]
+    A -->|import| G[Tasks Module]
+    G --> H(Task List Component)
+    G --> I(Task Item Component)
+    G --> J(Task Details Component)
+    H --> K(Task Item Component)
+    J --> L(Notification Service)
+    J --> M(Task Service)
+```

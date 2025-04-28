@@ -1,0 +1,22 @@
+Here is the Mermaid flowchart syntax based on the provided documentation:
+
+```mermaid
+graph LR
+    A[Angular App] -->|Imported Modules|> B[Common Module]
+    A -->|Imported Modules|> C[Core Module]
+    B -->|Declarations|> D[TaskListComponent]
+    B -->|Declarations|> E[TaskItemComponent]
+    B -->|Declarations|> F[TaskDetailsComponent]
+    C -->|Declarations|> G[NotificationService]
+    C -->|Declarations|> H[TaskService]
+    D -->|Components|> I[TaskList Component]
+    E -->|Components|> J[Task Item Component]
+    F -->|Components|> K[Task Details Component]
+    G -->|Methods|> L[Alert Method]
+    H -->|Methods|> M[Get Tasks Method]
+    H -->|Methods|> N[Get Task Method]
+```
+
+This flowchart represents the relationships between the Angular app, its modules, components, and services. The graph nodes represent entities such as modules (B), services (G, H), components (D, E, F), and methods (L, M, N). The arrows show the dependencies and connections between these entities.
+
+Please note that this is a simplified representation of the relationships and might not cover all the details from the provided documentation.

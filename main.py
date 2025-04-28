@@ -75,6 +75,11 @@ STRICT RULES:
 - Declare all dependencies (--> connections) outside subgraphs.
 - The diagram must start with ```mermaid and end cleanly.
 - Do NOT explain anything outside the diagram.
+- Use only the syntax: NodeA --> NodeB or NodeA -->|Label|NodeB
+- DO NOT use |>, |>B[Node], or any invalid combinations.
+- Only use |Label| syntax between nodes.
+- If you use invalid syntax like |>, it will be considered wrong.
+- Keep the graph strictly compliant with Mermaid Flowchart syntax.
 
 Here are the TypeScript files:
 ---
@@ -117,11 +122,16 @@ class SyntaxCheckerAgent:
         prompt = f"""
 You are a Mermaid syntax validator.
 
-Your task:
-- Carefully read the following Mermaid diagram.
-- If the syntax is fully valid, simply reply exactly: VALID
-- If the syntax is invalid, list the syntax errors you detect.
-- Do not modify or correct the diagram.
+Your ONLY possible outputs are:
+
+- If the diagram is fully syntactically correct, reply with exactly this word: VALID
+- If the diagram has syntax errors, list the errors clearly.
+
+IMPORTANT:
+- Do not explain anything.
+- Do not compliment the diagram.
+- Do not say anything else except either VALID or a list of syntax errors.
+- Any extra text will be considered an invalid response.
 
 Diagram to validate:
 ```mermaid
@@ -152,6 +162,10 @@ Diagram to validate:
                 except json.JSONDecodeError:
                     pass
 
+
+        # Additional manual syntax check for forbidden patterns
+        if '|>' in self.diagram_text:
+            return "ERROR: Forbidden syntax '|>' detected."
         return full_response.strip()
 
 
