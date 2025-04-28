@@ -1,0 +1,24 @@
+```
+graph LR
+    A[App] -->|Mermaid Flowchart syntax|> B(App)
+    B --> C(TasksModule)
+    C --> D(TaskListComponent)
+    C --> E(TaskItemComponent)
+    C --> F(TaskDetailsComponent)
+
+    G[Services] -->|Mermaid Flowchart syntax|> H(NotificationService)
+    G -->|Mermaid Flowchart syntax|> I(TaskService)
+    H --> J(NotificationService)
+    I --> K(getTasks)
+    I --> L(getTask)
+
+    M[TestFiles] -->|Mermaid Flowchart syntax|> N(TasksModule.spec.ts)
+    M --> O(NotificationService.spec.ts)
+    M --> P(TaskService.spec.ts)
+    Q[Components] -->|Mermaid Flowchart syntax|> R(TaskListComponent)
+    Q -->|Mermaid Flowchart syntax|> S(TaskItemComponent)
+    Q -->|Mermaid Flowchart syntax|> T(TaskDetailsComponent)
+
+    E --> U(getTask)
+    F --> V(notify)
+```
