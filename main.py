@@ -28,11 +28,15 @@ Your task is to read the following TypeScript files and extract a logical repres
 
 Output ONLY a valid **Mermaid graph** using **graph LR**.
 
-Rules:
+IMPORTANT RULES:
 - Connect elements with `-->` showing their dependencies.
 - DO NOT add any lines like `Module --> X` to describe types.
 - Use subgraphs for modules if necessary.
 - Do not add explanations or extra text outside the code block.
+- Only use elements (modules, components, services) found in the input code.
+- Never invent new modules, components, or services.
+- Only generate connections between existing entities.
+- If unsure, skip rather than inventing.
 
 Here are the files:
 ---
@@ -45,6 +49,7 @@ Here are the files:
 def send_prompt_to_ollama(prompt):
     payload = {
         "model": MODEL_NAME,
+        "temperature": 0, # makes the model more consistent and less creative
         "messages": [
             {"role": "user", "content": prompt}
         ]
