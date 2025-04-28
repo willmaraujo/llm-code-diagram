@@ -1,0 +1,11 @@
+graph LR
+    AppModule --> RoutingModule
+    RoutingModule --> AppRoutingModule
+    AppRoutingModule --> RouterTestingModule
+    AppComponent --> NavbarComponent
+    NavbarComponent --> TasksModule
+    TasksModule --> TaskListComponent
+    TaskListComponent --> TaskItemComponent
+    TaskItemComponent --> TaskDetailsComponent
+    TaskDetailsComponent --> TaskService
+    TaskDetailsComponent --> NotificationService

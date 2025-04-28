@@ -1,0 +1,18 @@
+graph LR
+subgraph AppModule
+AppModule --> RouterModule
+AppModule --> TasksModule
+AppModule --> BrowserModule
+AppModule --> AppComponent
+AppComponent --> NavbarComponent
+TasksModule --> TaskListComponent
+TasksModule --> TaskItemComponent
+TasksModule --> TaskDetailsComponent
+TaskListComponent --> TaskItemComponent
+TaskDetailsComponent --> TaskService
+TaskDetailsComponent --> NotificationService
+NotificationService
+TaskService
+NavbarComponent
+
+Note: The graph is generated based on the provided TypeScript files. It represents the dependencies between modules, components, and services in the project.

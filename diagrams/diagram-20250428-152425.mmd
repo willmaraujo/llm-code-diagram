@@ -1,0 +1,27 @@
+Here is the Mermaid graph representation of the project dependencies:
+
+graph LR
+  subgraph AppModule
+    AppRoutingModule --> RouterModule
+    AppModule --> BrowserModule
+    AppModule --> TasksModule
+    AppModule --> AppComponent
+  end
+  
+  subgraph TasksModule
+    TaskListComponent --> TaskItemComponent
+    TaskListComponent --> TaskDetailsComponent
+  end
+  
+  subgraph Services
+    NotificationService --> TaskDetailsComponent
+    TaskService --> TaskDetailsComponent
+  end
+  
+  subgraph Components
+    NavbarComponent --> AppModule
+    AppComponent --> AppModule
+    TaskListComponent --> AppModule
+    TaskItemComponent --> TasksModule
+    TaskDetailsComponent --> TasksModule
+  end

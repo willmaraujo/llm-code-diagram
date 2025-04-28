@@ -1,6 +1,7 @@
 import os
 import requests
 import json
+from datetime import datetime
 
 # Settings
 OLLAMA_API_URL = "http://localhost:11434/api/chat"
@@ -70,18 +71,12 @@ def send_prompt_to_ollama(prompt):
 
     return full_response
 
-def save_mermaid_diagram(content, output_dir="diagrams", filename="diagram.mmd"):
-    """
-    Save the Mermaid diagram content to a file.
-    
-    Args:
-        content (str): Mermaid diagram content.
-        output_dir (str): Directory to save the diagram.
-        filename (str): Filename for the saved diagram.
-    """
+def save_mermaid_diagram(content, output_dir="diagrams"):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
+    timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+    filename = f"diagram-{timestamp}.mmd"
     output_path = os.path.join(output_dir, filename)
     
     with open(output_path, "w", encoding="utf-8") as f:

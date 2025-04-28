@@ -1,0 +1,25 @@
+Here is the Mermaid graph representing the project dependencies:
+```
+graph LR
+    subgraph AppModule
+        AppComponent -->|imported from| NavbarComponent
+        TasksModule -->|declared by| AppModule
+    end
+    subgraph TasksModule
+        TaskListComponent -->|declared by| TasksModule
+        TaskItemComponent -->|declared by| TasksModule
+        TaskDetailsComponent -->|declared by| TasksModule
+    end
+    subgraph TaskDetailsComponent
+        TaskService -->|injected into| TaskDetailsComponent
+        NotificationService -->|injected into| TaskDetailsComponent
+    end
+    subgraph Services
+        TaskService -->|provided in| AppModule
+        NotificationService -->|provided in| AppModule
+    end
+    AppRoutingModule -->|imported from| RouterModule
+    RouterTestingModule -->|imported by| TestBed
+    RouterTestingModule -->|used for testing| AppComponent
+```
+Note: This graph represents the logical dependencies between modules, components, and services. It does not show any physical file locations or imports that are not explicitly declared in the input code.

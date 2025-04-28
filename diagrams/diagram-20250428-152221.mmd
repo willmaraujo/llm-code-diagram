@@ -1,0 +1,25 @@
+Here is the Mermaid graph representing the project dependencies between modules, components, and services:
+
+graph LR
+    subgraph AppModule
+        AppRoutingModule --> RouterModule
+        TasksModule --> CommonModule
+    end
+
+    subgraph Components
+        AppComponent --> [RouterModule]
+        NavbarComponent -->
+        TaskListComponent -->
+        TaskItemComponent -->
+        TaskDetailsComponent -->
+    end
+
+    subgraph Services
+        TaskService --> TaskDetailsComponent
+        NotificationService --> TaskDetailsComponent
+    end
+
+    TaskDetailsService --> TaskService
+    TasksModule --> AppModule
+
+Note: The graph only shows the dependencies between existing entities in the input code, without inventing any new modules, components, or services.

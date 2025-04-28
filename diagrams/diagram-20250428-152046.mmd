@@ -1,0 +1,24 @@
+Here is the Mermaid graph:
+
+graph LR
+    subgraph "Modules"
+        AppModule --> AppRoutingModule
+        TasksModule --> TaskListComponent
+        TasksModule --> TaskItemComponent
+        TasksModule --> TaskDetailsComponent
+    end
+    
+    subgraph "Components"
+        AppComponent --> NavbarComponent
+        TaskListComponent --> TaskItemComponent
+        TaskDetailsComponent --> NotificationService
+    end
+    
+    subgraph "Services"
+        TaskService --> TaskDetailsComponent
+        NotificationService --> TaskDetailsComponent
+    end
+    
+    classdef Module abstract
+    classdef Component abstract
+    classdef Service abstract

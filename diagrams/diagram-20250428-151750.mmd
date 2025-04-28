@@ -1,0 +1,31 @@
+Here is the Mermaid graph representation of the project dependencies:
+```
+graph LR
+    subgraph "App"
+        AppRoutingModule --> RouterModule
+        AppModule --> BrowserModule
+        AppModule --> TasksModule
+        AppModule --> RouterModule
+        AppComponent --> NavbarComponent
+    end
+    
+    subgraph "Tasks"
+        TasksModule --> TaskListComponent
+        TasksModule --> TaskItemComponent
+        TasksModule --> TaskDetailsComponent
+        
+        TaskListComponent --> TaskItemComponent
+        TaskItemComponent --> TaskDetailsComponent
+        
+        TaskDetailsComponent --> TaskService
+        TaskDetailsComponent --> NotificationService
+        
+        TaskService --> TaskItemComponent
+    end
+    
+    subgraph "Services"
+        NotificationService --> TaskDetailsComponent
+        TaskService --> TaskDetailsComponent
+    end
+```
+Note that I've used subgraphs to group related modules and components together, making the graph easier to read.

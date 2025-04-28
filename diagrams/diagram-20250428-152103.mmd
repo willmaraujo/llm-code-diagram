@@ -1,0 +1,16 @@
+graph LR
+    subgraph "Modules"
+        AppModule --> RouterModule
+        TasksModule --> CommonModule
+    end
+    subgraph "Components"
+        AppComponent --> NavbarComponent
+        TaskListComponent --> TaskItemComponent
+        TaskDetailsComponent --> TaskService
+        NavbarComponent --> AppComponent
+        TaskItemComponent --> TaskItemComponent
+    end
+    subgraph "Services"
+        TaskService --> TaskDetailsComponent
+        NotificationService --> TaskDetailsComponent
+    end
