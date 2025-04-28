@@ -1,0 +1,18 @@
+Here is the Mermaid Flowchart syntax representing the project structure:
+
+```mermaid
+graph LR
+    A[App] -->|Uses|> B[TasksModule]
+    B -->|Contains|> C[TaskListComponent]
+    B -->|Contains|> D[TaskItemComponent]
+    B -->|Contains|> E[TaskDetailsComponent]
+    F[Services] -->|Provides|> G[TaskService]
+    F -->|Provides|> H[NotificationService]
+    I[TestFiles] -->|Tests|> J[TaskListComponentSpec]
+    I -->|Tests|> K[TaskItemComponentSpec]
+    I -->|Tests|> L[TaskDetailsComponentSpec]
+    M[NotificationServiceSpec] -->|Tests|> N[NotificationService]
+    O[TaskServiceSpec] -->|Tests|> P[TaskService]
+```
+
+Please note that this flowchart only represents the project structure and does not include any specific logic or functionality.

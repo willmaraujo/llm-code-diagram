@@ -1,0 +1,18 @@
+```mermaid
+graph LR
+A[System] -->|imported| B[NotificationService]
+B -->|alert| C[Console Log]
+D[TaskService] -->|imported| E[TaskDetailsComponent]
+E --> F(Task Details)
+G[Test Service] --> H[Test Service Spec]
+I[Test Notification] --> J[Test Notification Spec]
+K[System] --> L[System Spec]
+M[Notification Service] --> N[Notification Service Spec]
+O[Task Service] --> P[Task Service Spec]
+
+classDef System fill:#ffeeff, stroke:#333
+classDef Component fill:#6666ff, stroke:#333
+
+style A fill:#ff99cc,stroke:#333,stroke-width:2px
+style D fill:#ff99cc,stroke:#333,stroke-width:2px
+style M fill:#ff99cc,stroke:#333,stroke-width:2px

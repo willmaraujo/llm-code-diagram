@@ -1,0 +1,65 @@
+Here is the essential flowchart syntax information extracted from the Mermaid documentation:
+
+**Flowchart Syntax**
+
+Mermaid uses a simple syntax to create flowcharts. Here are the basic elements:
+
+* `start` : The starting point of the chart
+* `end` : The ending point of the chart
+* `node` : A node in the chart, which can have multiple labels (e.g., text, icon, shape)
+* `edge` : An edge connecting two nodes
+* `arrow` : An arrow pointing from one node to another
+
+**Node Syntax**
+
+A node has the following syntax:
+```
+[node id] [label]
+```
+Where:
+
+* `[node id]` is a unique identifier for the node
+* `[label]` is the text or icon that appears on the node
+
+Example: `node1 This is a node`
+
+**Edge Syntax**
+
+An edge has the following syntax:
+```
+[from] -> [to] [label]
+```
+Where:
+
+* `[from]` is the node that the edge starts from
+* `[to]` is the node that the edge points to
+* `[label]` is an optional label for the edge
+
+Example: `node1 -> node2 "This is a link"`
+
+**Flowchart Structure**
+
+A flowchart typically consists of:
+
+1. A starting node (`start`)
+2. One or more nodes that represent decisions, actions, or processes
+3. Edges connecting these nodes to form a logical sequence
+
+Here's an example of a simple flowchart:
+```
+graph LR
+  start --> node1[This is the start]
+  node1 -->|Yes|> node2[Do something]
+  node2 --> node3[End]
+  node1 -->|No|> node4[Else]
+  node4 --> node5[Do something else]
+  node5 --> node3[End]
+```
+In this example:
+
+* `start` is the starting node
+* `node1` represents a decision (Yes/No)
+* `node2` and `node3` represent actions or processes
+* `node4` and `node5` represent alternative paths
+
+I hope this helps! Let me know if you have any further questions.
