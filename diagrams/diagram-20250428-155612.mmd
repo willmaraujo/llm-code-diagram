@@ -1,0 +1,24 @@
+```mermaid
+graph LR
+subgraph AppModule
+AppModule --> AppRoutingModule
+AppModule --> TasksModule
+AppModule --> BrowserModule
+AppModule --> RouterModule
+end
+subgraph TasksModule
+TasksModule --> TaskListComponent
+TasksModule --> TaskItemComponent
+TasksModule --> TaskDetailsComponent
+TaskListComponent --> TaskItemComponent
+TaskItemComponent --> TaskDetailsComponent
+end
+AppRoutingModule --> RouterModule
+NavbarComponent --> AppModule
+AppComponent --> AppRoutingModule
+TaskDetailsComponent --> TaskService
+TaskService --> TaskDetailsComponent
+NotificationService --> TaskDetailsComponent
+NotificationService --> TaskService
+```
+Note: This is a valid Mermaid graph. It represents the dependencies between modules, components, and services in your Angular project.

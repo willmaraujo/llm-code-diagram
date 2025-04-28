@@ -1,0 +1,39 @@
+```mermaid
+graph LR
+    classDef module style fill:#f9f,stroke-width:4px,stroke:#333;
+    classDef component style fill:#ff0,stroke-width:2px,stroke:#000;
+    classDef service style fill:#ccf,stroke-width:2px,stroke:#333;
+
+    subgraph AppModule["AppModule"]
+        AppBarComponent
+        NavbarComponent
+        AppComponent
+        RouterModule
+        TasksModule
+    end
+
+    AppBarComponent --> NavbarComponent
+    AppModule --> RouterModule
+    AppModule --> TasksModule
+    TasksModule --> TaskListComponent
+    TasksModule --> TaskItemComponent
+    TasksModule --> TaskDetailsComponent
+
+    subgraph TaskListComponent["TaskListComponent"]
+        NotificationService
+    end
+
+    TaskDetailsComponent --> TaskService
+    TaskDetailsComponent --> NotificationService
+
+    class AppBarComponent component
+    class NavbarComponent component
+    class AppComponent component
+    class RouterModule module
+    class TasksModule module
+    class TaskListComponent component
+    class TaskItemComponent component
+    class TaskDetailsComponent component
+    class NotificationService service
+    class TaskService service
+```

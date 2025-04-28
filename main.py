@@ -33,11 +33,16 @@ IMPORTANT RULES:
 - Connect elements with `-->` showing their dependencies.
 - DO NOT add any lines like `Module --> X` to describe types.
 - Use subgraphs for modules if necessary.
-- Do not add explanations or extra text outside the code block.
-- Only use elements (modules, components, services) found in the input code.
-- Never invent new modules, components, or services.
-- Only generate connections between existing entities.
-- If unsure, skip rather than inventing.
+- Do not add explanations or commentary outside the code block.
+- Only use elements (modules, components, services) found exactly as written in the input code.
+- NEVER invent new modules, components, or services.
+- NEVER rename, modify, or assume a missing entity.
+- If unsure about a dependency, SKIP IT.
+- STRICTLY output a Mermaid diagram starting with ```mermaid and ending at the end of the diagram.
+- Maintain proper Mermaid syntax indentation.
+- DO NOT explain or add commentary outside the code block.
+- Inside each subgraph, list only node names (no arrows inside subgraphs).
+- Draw all dependencies as arrows (--> connections) outside subgraphs
 
 Here are the files:
 ---

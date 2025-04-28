@@ -1,0 +1,26 @@
+```mermaid
+graph LR
+subgraph AppModule
+  classDef module style filled, shape="box", fill="#C4F7B9"
+  AppModule[module] --> AppComponent
+  AppModule[module] --> NavbarComponent
+  AppModule[module] --> TasksModule
+  TasksModule[module] --> TaskListComponent
+  TasksModule[module] --> TaskItemComponent
+  TasksModule[module] --> TaskDetailsComponent
+  NavbarComponent[component]
+  AppComponent[component]
+  TaskListComponent[component]
+  TaskItemComponent[component]
+  TaskDetailsComponent[component]
+end
+
+subgraph Services
+  classDef service style filled, shape="box", fill="#8BC34A"
+  NotificationService[service] --> TaskDetailsComponent
+  TaskService[service] --> TaskDetailsComponent
+end
+
+AppRoutingModule[module]
+RouterTestingModule[library] --> AppModule[module]
+```

@@ -1,0 +1,30 @@
+```mermaid
+graph LR
+subgraph AppModule
+AppModule --> BrowserModule
+AppModule --> RouterModule
+AppModule --> TasksModule
+AppModule --> AppRoutingModule
+end
+
+subgraph TasksModule
+TasksModule --> CommonModule
+TasksModule --> TaskListComponent
+TasksModule --> TaskItemComponent
+TasksModule --> TaskDetailsComponent
+end
+
+TaskListComponent --> TaskItemComponent
+TaskItemComponent --> TaskDetailsComponent
+
+subgraph Services
+TaskService --> TaskDetailsComponent
+NotificationService --> TaskDetailsComponent
+end
+
+AppRoutingModule --> AppModule
+
+AppComponent --> NavbarComponent
+NavbarComponent --> AppModule
+
+AppRoutingModule --> AppRoutingModule
