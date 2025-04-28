@@ -30,6 +30,27 @@ You have access to the following documentation about Mermaid Flowchart syntax (D
 
 {mermaid_doc}
 
+IMPORTANT EXAMPLES:
+
+GOOD EXAMPLE (Correct Mermaid Diagram):
+```mermaid
+graph LR
+subgraph AppModule
+  AppComponent
+  NavbarComponent
+end
+
+AppComponent --> NavbarComponent
+NavbarComponent --> RouterModule
+
+graph LR
+subgraph AppModule
+  AppModule --> BrowserModule
+  AppRoutingModule --> AppRoutingModule
+end
+TasksModule --> TaskItemComponent
+TasksModule --> TasksModule
+
 Your task:
 
 You are a system that analyzes Angular projects.

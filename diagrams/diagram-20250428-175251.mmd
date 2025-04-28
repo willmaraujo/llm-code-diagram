@@ -1,0 +1,21 @@
+Here is the Mermaid Flowchart syntax for your documentation:
+```mermaid
+graph LR
+    A[Angular App] -->|Importing Modules|> B(Module)
+    B -->|Components|> C(TaskListComponent)
+    B -->|Components|> D(TaskItemComponent)
+    B -->|Components|> E(TaskDetailsComponent)
+    C -->|Template File|> F(task-list.component.html)
+    D -->|Template File|> G(task-item.component.html)
+    E -->|Template File|> H(task-details.component.html)
+    F[Task List] -->|Service Call|> I(TaskService)
+    G[Task Item] -->|Service Call|> I(TaskService)
+    H[Task Details] -->|Service Call|> I(TaskService)
+    I[Task Service] -->|Function|> J(getTasks())
+    I -->|Function|> K(getTask(id))
+    J -->|Return Value|> L([{ id: 1, title: 'Sample Task' }])
+    K -->|Return Value|> M({ id, title: 'Sample Task ' + id })
+```
+This flowchart shows the relationships between your Angular components, services, and modules. The nodes represent the different parts of your application, and the edges show the flow of data and control between them.
+
+Note that this is just one possible way to represent your documentation using Mermaid syntax. You can customize the appearance and content of the flowchart to suit your needs.
