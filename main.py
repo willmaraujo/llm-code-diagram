@@ -113,7 +113,6 @@ Here are the TypeScript files:
 
         return full_response
 
-
 class SyntaxCheckerAgent:
     def __init__(self, diagram_text):
         self.diagram_text = diagram_text
@@ -168,6 +167,61 @@ Diagram to validate:
             return "ERROR: Forbidden syntax '|>' detected."
         return full_response.strip()
 
+class CorrectionAgent:
+    def __init__(self, invalid_diagram: str, validation_errors: str, original_prompt: str = None):
+        self.invalid_diagram = invalid_diagram
+        self.validation_errors = validation_errors
+        self.original_prompt = original_prompt
+
+    def build_correction_prompt(self) -> str:
+        prompt = f"""
+You are a Mermaid diagram correction agent.
+
+Your task is to fix the syntax errors in a Mermaid diagram.
+
+You will receive:
+- A Mermaid diagram that contains errors
+- A list of those errors
+- The original prompt that generated the diagram (for context)
+
+Please fix the diagram to make it syntactically valid.
+Do not explain anything. Output only the corrected Mermaid diagram between ```mermaid and ```.
+
+Errors:
+{self.validation_errors}
+
+Invalid Diagram:
+{self.invalid_diagram}
+
+Original Prompt:
+{self.original_prompt or 'N/A'}
+"""
+        return prompt.strip()
+
+    def correct_diagram(self) -> str:
+        prompt = self.build_correction_prompt()
+
+        payload = {
+            "model": MODEL_NAME,
+            "temperature": 0,
+            "messages": [{"role": "user", "content": prompt}]
+        }
+
+        response = requests.post(OLLAMA_API_URL, json=payload, stream=True)
+        response.raise_for_status()
+
+        full_response = ""
+        for line in response.iter_lines():
+            if line:
+                json_line = line.decode("utf-8")
+                try:
+                    parsed = json.loads(json_line)
+                    if "message" in parsed and "content" in parsed["message"]:
+                        full_response += parsed["message"]["content"]
+                except json.JSONDecodeError:
+                    pass
+
+        return full_response.strip()
 
 def save_mermaid_diagram(content, output_dir=DIAGRAM_OUTPUT_DIR):
     if not os.path.exists(output_dir):
@@ -182,16 +236,32 @@ def save_mermaid_diagram(content, output_dir=DIAGRAM_OUTPUT_DIR):
 
     print(f"Mermaid diagram saved to {output_path}")
 
-
 if __name__ == "__main__":
+    # Step 1: Generate the diagram
     generator = DiagramGeneratorAgent(PROJECT_PATH, MERMAID_DOC_PATH)
+    prompt = generator.build_prompt(generator.read_all_ts_files())
     diagram = generator.generate_diagram()
 
+    # Step 2: Validate the diagram
     checker = SyntaxCheckerAgent(diagram)
     syntax_result = checker.check_syntax()
 
     if syntax_result == "VALID":
         save_mermaid_diagram(diagram)
     else:
-        print("\nSyntax Errors Found:")
+        print("\nInitial diagram failed validation:")
         print(syntax_result)
+
+        # Step 3: Attempt correction
+        corrector = CorrectionAgent(diagram, syntax_result, prompt)
+        corrected_diagram = corrector.correct_diagram()
+
+        # Step 4: Re-validate
+        recheck = SyntaxCheckerAgent(corrected_diagram)
+        recheck_result = recheck.check_syntax()
+
+        if recheck_result == "VALID":
+            save_mermaid_diagram(corrected_diagram)
+        else:
+            print("\nCorrection attempt failed:")
+            print(recheck_result)
