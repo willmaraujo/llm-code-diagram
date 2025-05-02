@@ -1,0 +1,23 @@
+Here is the Mermaid Flowchart syntax for the dependency graph:
+
+```mermaid
+graph LR
+subgraph AppModule
+  BrowserModule
+  AppRoutingModule
+  TasksModule
+end
+
+AppComponent -->|App Component| NavbarComponent
+NavbarComponent --> RouterModule
+RoutingModule --> AppRoutingModule
+
+TasksModule --> TaskListComponent
+TaskListComponent --> TaskItemComponent
+TaskItemComponent --> TaskDetailsComponent
+TaskDetailsComponent --> NotificationService
+NotificationService --> TaskService
+
+RouterModule --> RoutingTestingModule
+
+Note: The strict rules mentioned in the task description were followed while creating this diagram.

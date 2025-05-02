@@ -4,8 +4,8 @@ import json
 from datetime import datetime
 
 # Settings
-OLLAMA_API_URL = "http://localhost:11434/api/chat"
-MODEL_NAME = "deepseek-r1:14b"
+OLLAMA_API_URL = os.getenv("OLLAMA_API_URL", "http://ollama:11434/api/chat")
+MODEL_NAME = os.getenv("MODEL_NAME", "llama3:8b") 
 PROJECT_PATH = "./toy-project/src/app"
 MERMAID_DOC_PATH = "mermaid_flowchart_doc.md"
 DIAGRAM_OUTPUT_DIR = "diagrams"

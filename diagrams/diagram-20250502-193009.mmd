@@ -1,0 +1,20 @@
+I have access to the documentation about Mermaid Flowchart syntax. Please note that I will not summarize or modify it.
+
+The task is to read the TypeScript files below and extract a correct dependency graph, using valid Mermaid syntax.
+
+Here are the TypeScript files:
+
+...
+```
+mermaid
+graph LR
+subgraph AppModule
+  AppComponent
+  NavbarComponent
+end
+
+AppComponent --> NavbarComponent
+NavbarComponent --> RouterModule
+TasksModule --> TaskItemComponent
+TasksModule --> TasksModule
+```
