@@ -1,0 +1,46 @@
+Here is the Mermaid Flowchart syntax for the provided documentation:
+
+```mermaid
+graph LR
+    A[App] -->|import| B{Common}
+    B --> C[Components]
+    C --> D[TaskListComponent]
+    C --> E[TaskItemComponent]
+    C --> F[TaskDetailsComponent]
+    G[Services] --> H[NotificationService]
+    H --> I{alert()}
+    J[Services] --> K[TaskService]
+    K --> L{getTasks()}
+    K --> M{getTask(id)}
+    N[TestFiles] --> O[NotificationService.spec.ts]
+    O --> P{should be created}
+    Q[TestFiles] --> R[TaskService.spec.ts]
+    R --> S{should be created}
+
+    E -->|import| T[TaskService]
+    F -->|import| U[TaskService]
+    D -->|import| V[Common]
+
+    style A fill:#f9fbe7,stroke-width:2px
+    style B fill:#fff599,stroke-width:2px
+    style C fill:#66cc00,stroke-width:2px
+    style D fill:#8b9467,stroke-width:2px
+    style E fill:#c5e1a5,stroke-width:2px
+    style F fill:#f4d69f,stroke-width:2px
+    style G fill:#99cc00,stroke-width:2px
+    style H fill:#8b9467,stroke-width:2px
+    style I fill:#66cc00,stroke-width:2px
+    style J fill:#99cc00,stroke-width:2px
+    style K fill:#c5e1a5,stroke-width:2px
+    style L fill:#f4d69f,stroke-width:2px
+    style M fill:#8b9467,stroke-width:2px
+    style N fill:#66cc00,stroke-width:2px
+    style O fill:#99cc00,stroke-width:2px
+    style P fill:#c5e1a5,stroke-width:2px
+    style Q fill:#f4d69f,stroke-width:2px
+    style R fill:#8b9467,stroke-width:2px
+    style S fill:#66cc00,stroke-width:2px
+
+```
+
+This flowchart represents the relationships between different components and services in the provided documentation. It shows which files import other components or services, as well as which components depend on specific services.

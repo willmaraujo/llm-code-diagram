@@ -1,0 +1,18 @@
+Here is the corrected Mermaid diagram:
+
+```mermaid
+graph LR
+    A[App] -->|import| B[TestComponent]
+    B -->|extends| C[ReactComponent]
+    C -->|uses| D[NotificationService]
+    D -->|alert| E[ConsoleLog]
+    F(TaskList)-->|renders| G(TaskListComponent)
+    G -->|displays| H[List of Tasks]
+    I(TaskItem)-->|renders| J(TaskItemComponent)
+    J -->|displays| K[Task Details]
+    L(TaskDetails)-->|renders| M(TaskDetailsComponent)
+    M -->|displays| N[Task Details]
+    O(NotificationService)-->|sends notification| P[ConsoleLog]
+```
+
+This Mermaid diagram represents the flow of components and services in your application. It shows how the `App` component imports the `TestComponent`, which extends a `ReactComponent`. The `NotificationService` is used by the `TaskItemComponent` to send an alert, which is displayed on the console.

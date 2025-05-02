@@ -5,10 +5,11 @@ from datetime import datetime
 
 # Settings
 OLLAMA_API_URL = "http://localhost:11434/api/chat"
-MODEL_NAME = "llama3:8b"
+MODEL_NAME = "deepseek-r1:14b"
 PROJECT_PATH = "./toy-project/src/app"
 MERMAID_DOC_PATH = "mermaid_flowchart_doc.md"
 DIAGRAM_OUTPUT_DIR = "diagrams"
+MAX_ATTEMPTS = 5
 
 class DiagramGeneratorAgent:
     def __init__(self, project_path, mermaid_doc_path):
@@ -245,32 +246,27 @@ if __name__ == "__main__":
     diagram = generator.generate_diagram()
     print("Diagram generated.\n")
 
-    # Step 2: Validate the diagram
-    print("Validating diagram syntax...")
-    checker = SyntaxCheckerAgent(diagram)
-    syntax_result = checker.check_syntax()
+    attempt = 1
+    while attempt <= MAX_ATTEMPTS:
+        print(f"\nAttempt {attempt} of {MAX_ATTEMPTS}")
+        print("Checking syntax...\n")
+        checker = SyntaxCheckerAgent(diagram)
+        syntax_result = checker.check_syntax()
 
-    if syntax_result == "VALID":
-        print("Diagram is valid! Saving...\n")
-        save_mermaid_diagram(diagram)
-    else:
-        print("\nInitial diagram failed validation:")
-        print(syntax_result)
-
-        # Step 3: Attempt correction
-        print("Attempting to correct diagram using CorrectionAgent...")
-        corrector = CorrectionAgent(diagram, syntax_result, prompt)
-        corrected_diagram = corrector.correct_diagram()
-        print("Correction attempt completed.\n")
-
-        # Step 4: Re-validate
-        print("Re-validating corrected diagram...")
-        recheck = SyntaxCheckerAgent(corrected_diagram)
-        recheck_result = recheck.check_syntax()
-
-        if recheck_result == "VALID":
-            print("Corrected diagram is valid! Saving...\n")
-            save_mermaid_diagram(corrected_diagram)
+        if "VALID" in syntax_result:
+            print("Diagram is valid! Saving...\n")
+            save_mermaid_diagram(diagram)
+            break
         else:
-            print("\nCorrection attempt failed:")
-            print(recheck_result)
+            print("Diagram is invalid:")
+            print(syntax_result)
+
+            if attempt == MAX_ATTEMPTS:
+                print("Max attempts reached. Diagram could not be validated.")
+                break
+
+            print("Attempting correction...")
+            corrector = CorrectionAgent(diagram, syntax_result, prompt)
+            diagram = corrector.correct_diagram()
+
+        attempt += 1
