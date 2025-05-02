@@ -183,6 +183,7 @@ You will receive:
 - A Mermaid diagram that contains errors
 - A list of those errors
 - The original prompt that generated the diagram (for context)
+- Do NOT use reserved Mermaid keywords like `end` as node IDs. Replace them with safe alternatives like `endNode`.
 
 Please fix the diagram to make it syntactically valid.
 Do not explain anything. Output only the corrected Mermaid diagram between ```mermaid and ```.
@@ -238,29 +239,37 @@ def save_mermaid_diagram(content, output_dir=DIAGRAM_OUTPUT_DIR):
 
 if __name__ == "__main__":
     # Step 1: Generate the diagram
+    print("Generating diagram...")
     generator = DiagramGeneratorAgent(PROJECT_PATH, MERMAID_DOC_PATH)
     prompt = generator.build_prompt(generator.read_all_ts_files())
     diagram = generator.generate_diagram()
+    print("Diagram generated.\n")
 
     # Step 2: Validate the diagram
+    print("Validating diagram syntax...")
     checker = SyntaxCheckerAgent(diagram)
     syntax_result = checker.check_syntax()
 
     if syntax_result == "VALID":
+        print("Diagram is valid! Saving...\n")
         save_mermaid_diagram(diagram)
     else:
         print("\nInitial diagram failed validation:")
         print(syntax_result)
 
         # Step 3: Attempt correction
+        print("Attempting to correct diagram using CorrectionAgent...")
         corrector = CorrectionAgent(diagram, syntax_result, prompt)
         corrected_diagram = corrector.correct_diagram()
+        print("Correction attempt completed.\n")
 
         # Step 4: Re-validate
+        print("Re-validating corrected diagram...")
         recheck = SyntaxCheckerAgent(corrected_diagram)
         recheck_result = recheck.check_syntax()
 
         if recheck_result == "VALID":
+            print("Corrected diagram is valid! Saving...\n")
             save_mermaid_diagram(corrected_diagram)
         else:
             print("\nCorrection attempt failed:")

@@ -1,0 +1,30 @@
+Here is the Mermaid Flowchart syntax based on the provided documentation:
+```
+graph LR
+    start[Start] -->|Import Modules| module[Module]
+    module -->|Components| comp1[TaskListComponent]
+    module -->|Components| comp2[TaskItemComponent]
+    module -->|Components| comp3[TaskDetailsComponent]
+    module -->|Services| service1[NotificationService]
+    module -->|Services| service2[TaskService]
+
+    comp1 -->|Has| taskItem[TaskItemComponent]
+    comp2 -->|Has| taskList[TaskListComponent]
+    comp3 -->|Uses| taskService[TaskService]
+    comp3 -->|Uses| notificationService[NotificationService]
+
+    taskItem -->|Shows| taskDetails[TaskDetailsComponent]
+    taskList -->|Displays| taskItems[TaskItemComponent]
+    taskService -->|Provides| tasks[List of Tasks]
+    notificationService -->|Alerts| messages[String Messages]
+
+    end[End] -->|Notify Users| notify[Notification Service]
+```
+This flowchart shows the relationships between the various components, services, and modules in the project. The graph is divided into several sections:
+
+* The top section shows the start of the program and the import of the various modules.
+* The middle section shows the different components (TaskListComponent, TaskItemComponent, and TaskDetailsComponent) that are part of the application.
+* The bottom section shows the relationships between the components and services. For example, the TaskDetailsComponent uses both the TaskService and NotificationService.
+* The end section shows the final step in the program, which is to notify users using the Notification Service.
+
+Note that this flowchart does not include every detail or relationship mentioned in the documentation. It is intended to provide a high-level overview of the project's structure and relationships.
