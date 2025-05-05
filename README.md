@@ -29,7 +29,7 @@ You can change the LLM model by editing the `MODEL_NAME` value inside `docker-co
 
 ```yaml
 environment:
-  - MODEL_NAME=llama3:8b
+  - MODEL_NAME=qwen3:8b
 ```
 
 Make sure the model is supported by Ollama and has been pulled or will be pulled automatically at startup.
