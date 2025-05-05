@@ -97,7 +97,7 @@ Here are the TypeScript files:
         payload = {
             "model": MODEL_NAME,
             "temperature": 0,
-            "messages": [{"role": "user", "content": prompt}]
+            "messages": [{"role": "user", "content": prompt + "/no_think"}]
         }
         response = requests.post(OLLAMA_API_URL, json=payload)
         response.raise_for_status()
@@ -147,7 +147,7 @@ Diagram to validate:
         payload = {
             "model": MODEL_NAME,
             "temperature": 0,
-            "messages": [{"role": "user", "content": prompt}]
+            "messages": [{"role": "user", "content": prompt + "/no_think"}]
         }
         response = requests.post(OLLAMA_API_URL, json=payload, stream=True)
         response.raise_for_status()
@@ -207,7 +207,7 @@ Original Prompt:
         payload = {
             "model": MODEL_NAME,
             "temperature": 0,
-            "messages": [{"role": "user", "content": prompt}]
+            "messages": [{"role": "user", "content": prompt + "/no_think"}]
         }
 
         response = requests.post(OLLAMA_API_URL, json=payload, stream=True)
