@@ -3,6 +3,7 @@ import requests
 import json
 from datetime import datetime
 import time
+import re
 
 # Settings
 OLLAMA_API_URL = os.getenv("OLLAMA_API_URL", "http://localhost:11434/api/chat")
@@ -230,14 +231,22 @@ def save_mermaid_diagram(content, output_dir=DIAGRAM_OUTPUT_DIR):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
+    content_to_save = extract_mermaid_code(content)
+
     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
     filename = f"diagram-{timestamp}.mmd"
     output_path = os.path.join(output_dir, filename)
 
     with open(output_path, "w", encoding="utf-8") as f:
-        f.write(content)
+        f.write(content_to_save)
 
     print(f"Mermaid diagram saved to {output_path}")
+
+def extract_mermaid_code(response_text: str) -> str:
+    match = re.search(r"```mermaid\n(.*?)```", response_text, re.DOTALL)
+    if match:
+        return match.group(1).strip()
+    return response_text.strip()
 
 if __name__ == "__main__":
     # Step 1: Generate the diagram
