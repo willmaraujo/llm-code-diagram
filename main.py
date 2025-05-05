@@ -2,9 +2,10 @@ import os
 import requests
 import json
 from datetime import datetime
+import time
 
 # Settings
-OLLAMA_API_URL = os.getenv("OLLAMA_API_URL", "http://ollama:11434/api/chat")
+OLLAMA_API_URL = os.getenv("OLLAMA_API_URL", "http://localhost:11434/api/chat")
 MODEL_NAME = os.getenv("MODEL_NAME", "llama3:8b") 
 PROJECT_PATH = "./toy-project/src/app"
 MERMAID_DOC_PATH = "mermaid_flowchart_doc.md"
@@ -98,7 +99,7 @@ Here are the TypeScript files:
             "temperature": 0,
             "messages": [{"role": "user", "content": prompt}]
         }
-        response = requests.post(OLLAMA_API_URL, json=payload, stream=True)
+        response = requests.post(OLLAMA_API_URL, json=payload)
         response.raise_for_status()
 
         full_response = ""
@@ -240,32 +241,34 @@ def save_mermaid_diagram(content, output_dir=DIAGRAM_OUTPUT_DIR):
 
 if __name__ == "__main__":
     # Step 1: Generate the diagram
-    print("Generating diagram...")
+    print("Generating diagram. This may take a moment depending on your system resources...", flush=True)
+    time.sleep(5)
     generator = DiagramGeneratorAgent(PROJECT_PATH, MERMAID_DOC_PATH)
     prompt = generator.build_prompt(generator.read_all_ts_files())
     diagram = generator.generate_diagram()
-    print("Diagram generated.\n")
+    print("Diagram generated", flush=True)
 
     attempt = 1
     while attempt <= MAX_ATTEMPTS:
-        print(f"\nAttempt {attempt} of {MAX_ATTEMPTS}")
-        print("Checking syntax...\n")
+        print("Checking syntax...", flush=True)
         checker = SyntaxCheckerAgent(diagram)
         syntax_result = checker.check_syntax()
 
         if "VALID" in syntax_result:
-            print("Diagram is valid! Saving...\n")
+            print("Diagram is valid! Saving...", flush=True)
             save_mermaid_diagram(diagram)
             break
         else:
-            print("Diagram is invalid:")
+            print("Diagram is invalid:", flush=True)
             print(syntax_result)
 
+            print(f"\nAttempt {attempt} of {MAX_ATTEMPTS}", flush=True)
+
             if attempt == MAX_ATTEMPTS:
-                print("Max attempts reached. Diagram could not be validated.")
+                print("Max attempts reached. Diagram could not be validated.", flush=True)
                 break
 
-            print("Attempting correction...")
+            print("Attempting correction. This may take a moment depending on your system resources...", flush=True)
             corrector = CorrectionAgent(diagram, syntax_result, prompt)
             diagram = corrector.correct_diagram()
 

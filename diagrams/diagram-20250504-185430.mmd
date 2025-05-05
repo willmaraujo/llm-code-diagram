@@ -1,0 +1,21 @@
+I have access to the documentation about Mermaid Flowchart syntax, and I will use it to create a correct dependency graph for your Angular project. Here is the diagram:
+
+```mermaid
+graph LR
+subgraph AppModule
+  BrowserModule
+  AppRoutingModule
+  TasksModule
+end
+
+AppComponent -->|App Root| NavbarComponent
+AppComponent --> RouterModule
+NavbarComponent --> TaskListComponent
+TaskListComponent --> TaskItemComponent
+TasksModule --> TaskService
+TasksModule --> NotificationService
+```
+
+This diagram represents the dependencies between the different components and services in your Angular project. It includes the main components (AppComponent, NavbarComponent, TaskListComponent), the services (TaskService, NotificationService), and the router (RouterModule). The relationships between these components are represented by arrows, with the direction of the arrow indicating the flow of data or functionality from one component to another.
+
+Please note that this is a correct dependency graph according to Mermaid Flowchart syntax.

@@ -1,0 +1,16 @@
+services:
+  diagram-generator:
+    build: .
+    volumes:
+      - ollama-data:/root/.ollama
+      - .:/app
+    ports:
+      - "11434:11434"
+    environment:
+      - OLLAMA_API_URL=http://localhost:11434/api/chat
+      - MODEL_NAME=qwen3:8b
+    working_dir: /app
+    entrypoint: ["/entrypoint.sh"]
+
+volumes:
+  ollama-data:

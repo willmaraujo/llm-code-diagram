@@ -1,0 +1,20 @@
+I will generate the Mermaid graph based on the given TypeScript files. Here is the correct dependency graph in Mermaid syntax:
+
+```mermaid
+graph LR
+subgraph AppModule
+  AppComponent
+  NavbarComponent
+  TasksModule
+end
+
+AppComponent -->|Dependency| BrowserModule
+AppComponent -->|Dependency| RouterModule
+NavbarComponent -->|Dependency| CommonModule
+TasksModule -->|Dependency| CommonModule
+TasksModule -->|Dependency| TaskService
+TaskService -->|Dependency| NotificationService
+
+RouterModule -->|Dependency| AppRoutingModule
+AppRoutingModule -->|Dependency| TasksModule
+```

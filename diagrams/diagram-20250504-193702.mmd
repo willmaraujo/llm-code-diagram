@@ -1,0 +1,24 @@
+Here is the corrected Mermaid diagram:
+
+```mermaid
+graph LR
+subgraph AppModule
+  AppComponent
+  NavbarComponent
+  TasksModule
+end
+
+AppRoutingModule -->|Routes| AppRoutingModule
+
+AppComponent --> NavbarComponent
+NavbarComponent --> RouterModule
+TasksModule --> TaskListComponent
+TaskListComponent --> TaskItemComponent
+TaskItemComponent --> TaskDetailsComponent
+
+TaskDetailsComponent --> NotificationService
+NotificationService --> TaskService
+TaskService --> getTask(1)
+```
+
+This diagram correctly shows the dependencies between the different components and services in the Angular project.
